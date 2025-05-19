@@ -118,7 +118,7 @@ contactForm.addEventListener('submit', async function (e) {
 
     try {
         // Update this URL to your Render backend URL
-        const response = await fetch('https://your-render-backend.onrender.com/send-email', {
+        const response = await fetch('https://designx-server.onrender.com/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
