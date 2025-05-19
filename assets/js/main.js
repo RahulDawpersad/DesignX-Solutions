@@ -76,75 +76,18 @@ backToTopBtn.addEventListener('click', () => {
     });
 });
 
-const validationPatterns = {
-  name: {
-    regex: /^[a-zA-Z\u00C0-\u017F\s'-]{2,50}$/, // Allows international characters and South African names
-    error: "Please enter a valid name (2-50 characters, no numbers/special chars)"
-  },
-  email: {
-    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    error: "Please enter a valid email address"
-  },
-  phone: {
-    regex: /^(\+27|0)[6-8][0-9]{8}$/, // South African mobile numbers
-    error: "Please enter a valid South African phone number (e.g. +27761234567 or 0712345678)"
-  },
-  message: {
-    regex: /^[\w\s\-.,!?()'"\u00C0-\u017F]{10,500}$/, // Basic message validation
-    error: "Message must be 10-500 characters long"
-  }
-};
-
-// Add this function to validate form fields
-function validateField(fieldId, value, isRequired = true) {
-  const field = document.getElementById(fieldId);
-  const pattern = validationPatterns[fieldId];
-  
-  if (!pattern) return true; // No validation pattern for this field
-  
-  if (isRequired && !value.trim()) {
-    showToast(`${field.labels[0].textContent} is required`, 'error');
-    field.classList.add('error');
-    return false;
-  }
-  
-  if (value && !pattern.regex.test(value)) {
-    showToast(pattern.error, 'error');
-    field.classList.add('error');
-    return false;
-  }
-  
-  field.classList.remove('error');
-  return true;
-}
-
 // Toast Notification System
 const toast = document.getElementById('toast');
 const closeToast = document.getElementById('closeToast');
 
-function showToast(message = 'Your message has been sent successfully!', type = 'success') {
-  const toast = document.getElementById('toast');
-  const icon = toast.querySelector('.icon');
-  
-  // Set icon based on type
-  if (type === 'error') {
-    toast.classList.add('error');
-    icon.className = 'icon fas fa-exclamation-circle';
-  } else if (type === 'warning') {
-    toast.classList.add('warning');
-    icon.className = 'icon fas fa-exclamation-triangle';
-  } else {
-    toast.classList.remove('error', 'warning');
-    icon.className = 'icon fas fa-check-circle';
-  }
-  
-  toast.querySelector('p').textContent = message;
-  toast.classList.add('active');
+function showToast(message = 'Your message has been sent successfully!') {
+    toast.querySelector('p').textContent = message;
+    toast.classList.add('active');
 
-  // Auto-hide after 5 seconds
-  setTimeout(() => {
-    toast.classList.remove('active');
-  }, 5000);
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 5000);
 }
 
 closeToast.addEventListener('click', () => {
@@ -156,78 +99,47 @@ closeToast.addEventListener('click', () => {
 // Updated form submission
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  // Validate all fields
-  const isValidName = validateField('name', document.getElementById('name').value);
-  const isValidEmail = validateField('email', document.getElementById('email').value);
-  const isValidPhone = validateField('phone', document.getElementById('phone').value, false); // Phone is optional
-  const isValidMessage = validateField('message', document.getElementById('message').value);
-  const isValidService = document.getElementById('service').value !== '';
+    // Get form values
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value || undefined,
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value
+    };
 
-  if (!isValidName || !isValidEmail || !isValidMessage || !isValidService) {
-    if (!isValidService) {
-      showToast('Please select a service', 'error');
-    }
-    return;
-  }
-
-  // Get form values
-  const formData = {
-    name: document.getElementById('name').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    phone: document.getElementById('phone').value ? document.getElementById('phone').value.trim() : undefined,
-    service: document.getElementById('service').value,
-    message: document.getElementById('message').value.trim()
-  };
-
-  // Additional spam checks
-  if (formData.message.includes('http://') || formData.message.includes('https://')) {
-    showToast('Links are not allowed in messages', 'error');
-    return;
-  }
-
-  if (formData.message.length > 500) {
-    showToast('Message is too long (max 500 characters)', 'error');
-    return;
-  }
-
-  try {
-    const response = await fetch('https://designx-server.onrender.com/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to send message');
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+        showToast('Please fill in all required fields');
+        return;
     }
 
-    showToast(`Thanks ${formData.name}! We'll contact you soon at ${formData.email}.`);
-    contactForm.reset();
-  } catch (error) {
-    console.error('Submission error:', error);
-    showToast(error.message || 'There was an error sending your message.', 'error');
-  }
+    try {
+        // Update this URL to your Render backend URL
+        const response = await fetch('https://designx-server.onrender.com/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to send message');
+        }
+
+        showToast(`Thanks ${formData.name}! We'll contact you soon at ${formData.email}.`);
+        contactForm.reset();
+    } catch (error) {
+        console.error('Submission error:', error);
+        showToast(error.message || 'There was an error sending your message.');
+    }
 });
 
-// Add real-time validation as users type
-document.getElementById('name').addEventListener('blur', function() {
-  validateField('name', this.value);
-});
-document.getElementById('email').addEventListener('blur', function() {
-  validateField('email', this.value);
-});
-document.getElementById('phone').addEventListener('blur', function() {
-  if (this.value) validateField('phone', this.value, false);
-});
-document.getElementById('message').addEventListener('blur', function() {
-  validateField('message', this.value);
-});
 
 
 // Pricing Fetched and sent to the Contact form
