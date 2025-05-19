@@ -193,7 +193,7 @@ contactForm.addEventListener('submit', async function (e) {
   }
 
   try {
-    const response = await fetch('https://your-render-backend.onrender.com/send-email', {
+    const response = await fetch('https://designx-server.onrender.com/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
