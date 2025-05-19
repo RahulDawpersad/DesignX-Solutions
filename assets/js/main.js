@@ -14,27 +14,27 @@ const pricingButtons = document.querySelectorAll('.pricing-btn');
 //      navLinks.classList.toggle('active');
 //  });
 hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
+  navLinks.classList.toggle('active');
+  hamburger.classList.toggle('active');
 
-    // Toggle between hamburger and close icons
-    if (navLinks.classList.contains('active')) {
-        hamburgerIcon.style.display = 'none';
-        closeIcon.style.display = 'block';
-    } else {
-        hamburgerIcon.style.display = 'block';
-        closeIcon.style.display = 'none';
-    }
+  // Toggle between hamburger and close icons
+  if (navLinks.classList.contains('active')) {
+    hamburgerIcon.style.display = 'none';
+    closeIcon.style.display = 'block';
+  } else {
+    hamburgerIcon.style.display = 'block';
+    closeIcon.style.display = 'none';
+  }
 });
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburgerIcon.style.display = 'block';
-        closeIcon.style.display = 'none';
-    });
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+    hamburgerIcon.style.display = 'block';
+    closeIcon.style.display = 'none';
+  });
 });
 //  document.querySelectorAll('.nav-links a').forEach(link => {
 //      link.addEventListener('click', () => {
@@ -44,151 +44,215 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
 
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
 
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 70,
-                behavior: 'smooth'
-            });
-        }
-    });
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 70,
+        behavior: 'smooth'
+      });
+    }
+  });
 });
 
 // Back to top button
 const backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('active');
-    } else {
-        backToTopBtn.classList.remove('active');
-    }
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add('active');
+  } else {
+    backToTopBtn.classList.remove('active');
+  }
 });
 
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 });
 
 // Toast Notification System
 const toast = document.getElementById('toast');
 const closeToast = document.getElementById('closeToast');
 
-function showToast(message = 'Your message has been sent successfully!') {
-    toast.querySelector('p').textContent = message;
-    toast.classList.add('active');
+function showToast(message = 'Your message has been sent successfully!', type = 'success') {
+  const toast = document.getElementById('toast');
+  const toastIcon = toast.querySelector('.icon');
+  const toastContent = toast.querySelector('.toast-content h3');
 
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-        toast.classList.remove('active');
-    }, 5000);
+  // Set icon and color based on type
+  if (type === 'error') {
+    toast.classList.add('error');
+    toastIcon.className = 'fas fa-exclamation-circle icon';
+    toastContent.textContent = 'Error';
+  } else if (type === 'warning') {
+    toast.classList.add('warning');
+    toastIcon.className = 'fas fa-exclamation-triangle icon';
+    toastContent.textContent = 'Warning';
+  } else {
+    toast.classList.remove('error', 'warning');
+    toastIcon.className = 'fas fa-check-circle icon';
+    toastContent.textContent = 'Success!';
+  }
+
+  // Set message (handles HTML line breaks)
+  toast.querySelector('.toast-content p').innerHTML = message;
+  toast.classList.add('active');
+
+  // Auto-hide after 5 seconds (or longer for errors)
+  setTimeout(() => {
+    toast.classList.remove('active');
+  }, type === 'error' ? 8000 : 5000);
 }
 
 closeToast.addEventListener('click', () => {
-    toast.classList.remove('active');
+  toast.classList.remove('active');
 });
 
+
+
+
+// Add this validation function at the top of your main.js file
+function validateFormFields(formData) {
+  const errors = [];
+  
+  // Name validation (2-50 characters, only letters, spaces, and apostrophes)
+  const nameRegex = /^[a-zA-ZÀ-ÿ]+(?:[ '][a-zA-ZÀ-ÿ]+)*$/;
+  if (!nameRegex.test(formData.name) || formData.name.length < 2 || formData.name.length > 50) {
+    errors.push('Please enter a valid full name (2-50 characters, only letters, spaces, and apostrophes allowed)');
+  }
+  
+  // Strict email validation (must end with proper domain extension)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/;
+  if (!emailRegex.test(formData.email)) {
+    errors.push('Please enter a valid email address (e.g., user@domain.com or user@domain.co.za)');
+  }
+  
+  // Phone validation (South African format - optional)
+  if (formData.phone) {
+    // SA phone regex: optional +27 or 0, followed by 9 digits (with optional spaces/dashes)
+    const phoneRegex = /^(\+27|0)[6-8][0-9]{8}$/;
+    const digitsOnly = formData.phone.replace(/[\s-]/g, ''); // Remove spaces and dashes
+    
+    if (!phoneRegex.test(digitsOnly)) {
+      errors.push('Please enter a valid South African phone number (e.g., +27697020214 or 0697020214)');
+    }
+  }
+  
+  // Service validation
+  if (!formData.service) {
+    errors.push('Please select a service');
+  }
+  
+  // Message validation (minimum 10 characters)
+  if (!formData.message || formData.message.trim().length < 10) {
+    errors.push('Please enter a message with at least 10 characters');
+  }
+  
+  return errors;
+}
 
 
 // Updated form submission
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Get form values
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value || undefined,
-        service: document.getElementById('service').value,
-        message: document.getElementById('message').value
-    };
+  // Get form values
+  const formData = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value ? document.getElementById('phone').value.trim() : undefined,
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value.trim()
+  };
 
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.service || !formData.message) {
-        showToast('Please fill in all required fields');
-        return;
+  // Validate fields
+  const validationErrors = validateFormFields(formData);
+
+  if (validationErrors.length > 0) {
+    showToast(validationErrors.join('<br>'), 'error');
+    return;
+  }
+
+  try {
+    // Update this URL to your Render backend URL
+    const response = await fetch('https://designx-server.onrender.com/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to send message');
     }
 
-    try {
-        // Update this URL to your Render backend URL
-        const response = await fetch('https://designx-server.onrender.com/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Failed to send message');
-        }
-
-        showToast(`Thanks ${formData.name}! We'll contact you soon at ${formData.email}.`);
-        contactForm.reset();
-    } catch (error) {
-        console.error('Submission error:', error);
-        showToast(error.message || 'There was an error sending your message.');
-    }
+    showToast(`Thanks ${formData.name}! We'll contact you soon at ${formData.email}.`);
+    contactForm.reset();
+  } catch (error) {
+    console.error('Submission error:', error);
+    showToast(error.message || 'There was an error sending your message.', 'error');
+  }
 });
 
 
 
 // Pricing Fetched and sent to the Contact form
 pricingButtons.forEach(button => {
-    button.addEventListener('click', function () {
-        const planCard = this.closest('.pricing-card');
-        const planName = planCard.querySelector('h3').textContent;
-        const price = planCard.querySelector('.amount').textContent;
+  button.addEventListener('click', function () {
+    const planCard = this.closest('.pricing-card');
+    const planName = planCard.querySelector('h3').textContent;
+    const price = planCard.querySelector('.amount').textContent;
 
-        // Get all features
-        const features = [];
-        const featureItems = planCard.querySelectorAll('.features-list li:not(.highlight):not(.note):not(.excluded)');
-        featureItems.forEach(item => {
-            features.push(item.textContent.trim());
-        });
-
-        // Get hosting details
-        const hostingItems = planCard.querySelectorAll('.note');
-        const hostingDetails = [];
-        hostingItems.forEach(item => {
-            hostingDetails.push(item.textContent.trim());
-        });
-
-        // Create the message
-        let messageText = `I'm interested in the ${planName} package (${price}).\n\n`;
-        messageText += `Features included:\n`;
-        features.forEach(feature => {
-            messageText += `- ${feature}\n`;
-        });
-
-        messageText += `\nHosting options:\n`;
-        hostingDetails.forEach(detail => {
-            messageText += `- ${detail}\n`;
-        });
-
-        messageText += `\nPlease contact me to discuss this further.`;
-
-        // Set the message
-        const messageField = document.getElementById('message');
-        if (messageField) {
-            messageField.value = messageText;
-        }
-
-        // Set service to Web Development
-        const serviceDropdown = document.getElementById('service');
-        if (serviceDropdown) {
-            serviceDropdown.value = 'web-development';
-        }
+    // Get all features
+    const features = [];
+    const featureItems = planCard.querySelectorAll('.features-list li:not(.highlight):not(.note):not(.excluded)');
+    featureItems.forEach(item => {
+      features.push(item.textContent.trim());
     });
+
+    // Get hosting details
+    const hostingItems = planCard.querySelectorAll('.note');
+    const hostingDetails = [];
+    hostingItems.forEach(item => {
+      hostingDetails.push(item.textContent.trim());
+    });
+
+    // Create the message
+    let messageText = `I'm interested in the ${planName} package (${price}).\n\n`;
+    messageText += `Features included:\n`;
+    features.forEach(feature => {
+      messageText += `- ${feature}\n`;
+    });
+
+    messageText += `\nHosting options:\n`;
+    hostingDetails.forEach(detail => {
+      messageText += `- ${detail}\n`;
+    });
+
+    messageText += `\nPlease contact me to discuss this further.`;
+
+    // Set the message
+    const messageField = document.getElementById('message');
+    if (messageField) {
+      messageField.value = messageText;
+    }
+
+    // Set service to Web Development
+    const serviceDropdown = document.getElementById('service');
+    if (serviceDropdown) {
+      serviceDropdown.value = 'web-development';
+    }
+  });
 });
 
 // // Toast notification function
@@ -231,26 +295,27 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // Add scroll effect to navbar
 window.addEventListener('scroll', function () {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    }
+  const header = document.querySelector('header');
+  if (window.scrollY > 100) {
+    header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+  } else {
+    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+  }
 });
 
 // Animation on scroll
 const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.fade-in');
-    elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
+  const elements = document.querySelectorAll('.fade-in');
+  elements.forEach(element => {
+    const elementPosition = element.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.3;
 
-        if (elementPosition < screenPosition) {
-            element.style.opacity = '1';
-        }
-    });
+    if (elementPosition < screenPosition) {
+      element.style.opacity = '1';
+    }
+  });
 };
+
 
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
