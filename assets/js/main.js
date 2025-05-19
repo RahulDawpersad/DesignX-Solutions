@@ -117,45 +117,62 @@ closeToast.addEventListener('click', () => {
 
 
 
-// Add this validation function at the top of your main.js file
 function validateFormFields(formData) {
   const errors = [];
-  
+
   // Name validation (2-50 characters, only letters, spaces, and apostrophes)
   const nameRegex = /^[a-zA-ZÀ-ÿ]+(?:[ '][a-zA-ZÀ-ÿ]+)*$/;
   if (!nameRegex.test(formData.name) || formData.name.length < 2 || formData.name.length > 50) {
     errors.push('Please enter a valid full name (2-50 characters, only letters, spaces, and apostrophes allowed)');
   }
-  
-  // Strict email validation (must end with proper domain extension)
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/;
-  if (!emailRegex.test(formData.email)) {
-    errors.push('Please enter a valid email address (e.g., user@domain.com or user@domain.co.za)');
+
+  // Email validation with strict known TLDs only
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|co\.za|edu|gov|za|biz|info)$/i;
+  if (
+    !emailRegex.test(formData.email) ||
+    formData.email.includes('..') ||
+    formData.email.endsWith('.') ||
+    formData.email.indexOf('@') !== formData.email.lastIndexOf('@') // Only one @ allowed
+  ) {
+    errors.push('Please enter a valid email address (e.g., name@domain.com)');
   }
-  
-  // Phone validation (South African format - optional)
+
+  // Phone number validation and formatting (South Africa)
   if (formData.phone) {
-    // SA phone regex: optional +27 or 0, followed by 9 digits (with optional spaces/dashes)
-    const phoneRegex = /^(\+27|0)[6-8][0-9]{8}$/;
-    const digitsOnly = formData.phone.replace(/[\s-]/g, ''); // Remove spaces and dashes
-    
-    if (!phoneRegex.test(digitsOnly)) {
-      errors.push('Please enter a valid South African phone number (e.g., +27697020214 or 0697020214)');
+    const digitsOnly = formData.phone.replace(/\D/g, '');
+    let isValid = false;
+    let formattedPhone = '';
+
+    if (digitsOnly.startsWith('27') && digitsOnly.length === 11) {
+      // +27 format
+      isValid = /^27[6-8]\d{8}$/.test(digitsOnly);
+      formattedPhone = `+${digitsOnly.substring(0, 2)} ${digitsOnly.substring(2, 5)} ${digitsOnly.substring(5, 8)} ${digitsOnly.substring(8)}`;
+    } else if (digitsOnly.startsWith('0') && digitsOnly.length === 10) {
+      // 0 format
+      isValid = /^0[6-8]\d{8}$/.test(digitsOnly);
+      formattedPhone = `${digitsOnly.substring(0, 3)} ${digitsOnly.substring(3, 6)} ${digitsOnly.substring(6)}`;
+    }
+
+    if (!isValid) {
+      errors.push('Please enter a valid South African phone number (e.g., +27 65 824 3463 or 065 824 3463)');
+    } else {
+      document.getElementById('phone').value = formattedPhone;
     }
   }
-  
+
   // Service validation
   if (!formData.service) {
     errors.push('Please select a service');
   }
-  
+
   // Message validation (minimum 10 characters)
   if (!formData.message || formData.message.trim().length < 10) {
     errors.push('Please enter a message with at least 10 characters');
   }
-  
+
   return errors;
 }
+
 
 
 // Updated form submission
