@@ -2151,3 +2151,39 @@ textarea.form-control {
     }
 
 }
+
+
+
+
+/* Contact Form Validation Styling */
+/* Add error styling for form fields */
+.form-control.error {
+  border-color: #ff3333;
+  box-shadow: 0 0 0 2px rgba(255, 51, 51, 0.2);
+}
+
+/* Add focus styles for better UX */
+.form-control:focus {
+  border-color: #4BB543;
+  box-shadow: 0 0 0 2px rgba(75, 181, 67, 0.2);
+  outline: none;
+}
+
+/* Style for select dropdown */
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
