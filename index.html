@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignX | Professional Web Development Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.module.css">
+    <style>
+        .img-logo {
+            width: 150px;
+            height: auto;
+            margin-top: 0.5em;
+        }
+
+        @media (max-width: 768px) {
+            .img-logo {
+                margin-top: 0.5em;
+            }
+        }
+
+        /* Toast Notification Styles */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4BB543;
+            color: white;
+            padding: 20px 35px 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transform: translateX(150%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 400px;
+        }
+
+        .toast.active {
+            transform: translateX(0);
+        }
+
+        .toast .icon {
+            font-size: 28px;
+            margin-right: 15px;
+        }
+
+        .toast .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .toast .close-btn:hover {
+            opacity: 1;
+        }
+
+        .toast-content h3 {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .toast-content p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        /* Animation for progress bar */
+        .toast::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .toast::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: white;
+            animation: progress 3s linear forwards;
+        }
+
+        /* Error toast */
+        .toast.error {
+            background: #ff3333;
+        }
+
+        /* Warning toast */
+        .toast.warning {
+            background: #ff9966;
+        }
+
+        @keyframes progress {
+            100% {
+                width: 0;
+            }
+        }
+
+        /* Add this to your styles */
+        #message:focus {
+            border-color: #4BB543;
+            box-shadow: 0 0 0 2px rgba(75, 181, 67, 0.2);
+        }
+
+        .pricing-btn {
+            transition: all 0.3s ease;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="assets/img/DesignX_Logo_New.png" class="img-logo" alt="DesignX Logo">
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars hamburger-icon"></i>
+                    <i class="fas fa-times close-icon" style="display: none;"></i>
+                </div>
+                <!-- Update the navigation in header -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#projects">Portfolio</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <!-- <li><a href="#contact" class="btn btn-primary">Get a Free Quote</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <!-- HD background image with parallax effect -->
+            <div class="bg-image" style="background-image: url('assets/img/hero_bg2.jpg');">
+            </div>
+            <div class="bg-overlay"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Professional Web Development Solutions for Your Business</h1>
+                <p class="hero-subtitle">Transforming Ideas into Digital Solutions</p>
+                <div class="hero-btns">
+                    <a href="#services" class="btn btn-primary">
+                        <span>Get Started</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-subtitle">What We Offer</span>
+                <h2 class="section-heading">Our Premium Services</h2>
+                <p class="section-description">Cutting-edge digital solutions tailored to elevate your online presence
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p class="service-description">Custom, responsive websites built with the latest technologies to
+                        ensure optimal performance and user experience across all devices.</p>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="service-title">Graphic Design</h3>
+                    <p class="service-description">Creative and professional design services including logos, branding,
+                        marketing materials, and UI/UX design for your digital products.</p>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="service-title">Premium Hosting</h3>
+                    <p class="service-description">Reliable and secure web hosting solutions at competitive prices,
+                        ensuring your website is always up and running smoothly.</p>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="service-title">Domain Management</h3>
+                    <p class="service-description">Comprehensive domain registration and management services to help you
+                        establish and maintain your online presence.</p>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">Choose the perfect plan for your web development needs</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Basic Website</h3>
+                        <div class="price">
+                            <span class="amount">R1500</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> Up to 5 pages</li>
+                        <li><span class="check-icon">✓</span> Responsive design</li>
+                        <li><span class="check-icon">✓</span> Basic SEO setup</li>
+                        <li><span class="check-icon">✓</span> Contact form</li>
+                        <li><span class="check-icon">✓</span> 1 round of revisions</li>
+                        <li class="excluded"><span class="x-icon">✕</span> Custom domain not included</li>
+                        <li class="highlight"><span class="star-icon">★</span> <strong>Hosting Options:</strong></li>
+                        <li class="note">- R200/month (billed monthly)</li>
+                        <li class="note">- R2400/year (12 Months)</li>
+                    </ul>
+                    <!-- <a href="#contact" class="pricing-btn secondary">Get Started</a> -->
+                    <a href="#contact" class="pricing-btn secondary" data-plan="Basic Website" data-price="R1500"
+                        data-hosting="R200/month or R2400/year">Get Started</a>
+                </div>
+
+                <!-- Popular Plan -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-header">
+                        <h3>Standard Website</h3>
+                        <div class="price">
+                            <span class="amount">R2500</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> Up to 10 pages</li>
+                        <li><span class="check-icon">✓</span> Responsive design</li>
+                        <li><span class="check-icon">✓</span> Enhanced SEO</li>
+                        <li><span class="check-icon">✓</span> Contact form + newsletter</li>
+                        <li><span class="check-icon">✓</span> 2 rounds of revisions</li>
+                        <li class="excluded"><span class="x-icon">✕</span> Custom domain not included</li>
+                        <li class="highlight"><span class="star-icon">★</span> <strong>Includes 1 Month Free
+                                Hosting</strong></li>
+                        <li class="highlight"><span class="star-icon">★</span> <strong>Hosting Options:</strong></li>
+                        <li class="note">- R200/month starting month 2 (11 payments)</li>
+                        <li class="note">- R2200 prepaid for 12 months (save R200)</li>
+                    </ul>
+                    <!-- <a href="#contact" class="pricing-btn primary">Get Started</a> -->
+                    <a href="#contact" class="pricing-btn primary" data-plan="Standard Website" data-price="R2500"
+                        data-hosting="1 Month Free, then R200/month (11 payments) or R2200 prepaid">Get Started</a>
+                </div>
+
+                <!-- Advanced Plan -->
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Advanced Website</h3>
+                        <div class="price">
+                            <span class="amount">R4500</span>
+                        </div>
+                    </div>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> Up to 20 pages</li>
+                        <li><span class="check-icon">✓</span> Fully responsive design</li>
+                        <li><span class="check-icon">✓</span> Advanced SEO optimization</li>
+                        <li><span class="check-icon">✓</span> Custom features & integrations</li>
+                        <li><span class="check-icon">✓</span> 3 rounds of revisions</li>
+                        <li class="excluded"><span class="x-icon">✕</span> Custom domain not included</li>
+                        <li class="highlight"><span class="star-icon">★</span> <strong>Includes 2 Months Free
+                                Hosting</strong></li>
+                        <li class="highlight"><span class="star-icon">★</span> <strong>Hosting Options:</strong></li>
+                        <li class="note">- R200/month starting month 3 (10 payments)</li>
+                        <li class="note">- R2000 prepaid for 12 months (save R400)</li>
+                    </ul>
+                    <!-- <a href="#contact" class="pricing-btn secondary">Get Started</a> -->
+                    <a href="#contact" class="pricing-btn secondary" data-plan="Advanced Website" data-price="R4500"
+                        data-hosting="2 Months Free, then R200/month (10 payments) or R2000 prepaid">Get Started</a>
+                </div>
+            </div>
+
+            <div class="hosting-note">
+                <p><strong>Note:</strong> All hosting plans include 24/7 support, 99.9% uptime, and regular backups.
+                    Monthly plans can be canceled anytime after the initial free period.</p>
+            </div>
+
+            <div class="payment-policy">
+                <div class="policy-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="policy-content">
+                    <h3>Payment Policy</h3>
+                    <p><strong>50% payment required before development begins.</strong> Remaining balance due after
+                        successful hosting setup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About DesignX</h2>
+                    <p>DesignX is a professional web development company founded by Rahul Dawpersad, a passionate
+                        Full-Stack Developer with years of experience creating digital solutions that drive business
+                        growth.</p>
+                    <p>We specialize in crafting beautiful, functional websites that not only look stunning but deliver
+                        exceptional performance across all devices. Our unique approach blends technical mastery with
+                        creative vision to build products that surpass expectations.</p>
+                    <p>From small businesses establishing their first online presence to enterprises needing
+                        comprehensive digital transformation, we have the expertise to turn your vision into reality
+                        with precision and innovation.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="about-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/img/designx-logo-video.mp4" type="video/mp4">
+                        <source src="assets/img/designx-logo-video.mp4" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <h2 class="testimonials-section-title">What Our Clients Say</h2>
+            <p class="testimonials-section-subtitle">Trusted by businesses worldwide</p>
+
+            <div class="testimonials-slider">
+                <div class="slider-container">
+                    <!-- Testimonial items will be added here by JavaScript -->
+                </div>
+
+                <div class="slider-controls">
+                    <button class="slider-btn prev-btn" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="slider-dots"></div>
+                    <button class="slider-btn next-btn" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <h2>Our Works</h2>
+            <p>Explore our portfolio of successful projects.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="card-front" style="background-image: url('assets/img/porfolio-images/project1.png')">
+                    <span class="project-tag">Web Application</span>
+                    <h3 class="project-title">Nexus Dashboard</h3>
+                    <p class="project-description">A comprehensive analytics platform for business intelligence.</p>
+                    <button class="view-project-btn"
+                        onclick="window.open('https://example.com/nexus-dashboard', '_blank')">View Project</button>
+                </div>
+                <div class="card-back">
+                    <div class="project-details">
+                        <h3>Nexus Dashboard</h3>
+                        <p>Revolutionary data visualization tool that transforms complex datasets into actionable
+                            insights with beautiful, interactive dashboards.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">React</span>
+                            <span class="tech-item">D3.js</span>
+                            <span class="tech-item">Node.js</span>
+                            <span class="tech-item">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://example.com/nexus-demo" class="project-link primary-link" target="_blank">
+                            Live Demo <i class="fas fa-external-link-alt link-icon"></i>
+                        </a>
+                        <a href="https://example.com/nexus-case-study" class="project-link secondary-link"
+                            target="_blank">
+                            Case Study <i class="fas fa-book-open link-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="card-front"
+                    style="background-image: url('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
+                    <span class="project-tag">Mobile App</span>
+                    <h3 class="project-title">UrbanFit</h3>
+                    <p class="project-description">Personalized fitness companion for urban lifestyles.</p>
+                    <button class="view-project-btn"
+                        onclick="window.open('https://example.com/urbanfit', '_blank')">View Project</button>
+                </div>
+                <div class="card-back">
+                    <div class="project-details">
+                        <h3>UrbanFit</h3>
+                        <p>AI-powered fitness app that creates customized workout plans based on your location,
+                            schedule, and available equipment.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Flutter</span>
+                            <span class="tech-item">Firebase</span>
+                            <span class="tech-item">TensorFlow</span>
+                            <span class="tech-item">Google Maps API</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://apps.apple.com/urbanfit" class="project-link primary-link" target="_blank">
+                            App Store <i class="fab fa-apple link-icon"></i>
+                        </a>
+                        <a href="https://example.com/urbanfit-whitepaper" class="project-link secondary-link"
+                            target="_blank">
+                            White Paper <i class="fas fa-file-alt link-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="card-front"
+                    style="background-image: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80')">
+                    <span class="project-tag">E-Commerce</span>
+                    <h3 class="project-title">Artisan Market</h3>
+                    <p class="project-description">Premium marketplace for handmade goods.</p>
+                    <button class="view-project-btn"
+                        onclick="window.open('https://example.com/artisan-market', '_blank')">View Project</button>
+                </div>
+                <div class="card-back">
+                    <div class="project-details">
+                        <h3>Artisan Market</h3>
+                        <p>Next-generation e-commerce platform connecting artisans with conscious consumers worldwide,
+                            featuring AR product previews.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Next.js</span>
+                            <span class="tech-item">Stripe</span>
+                            <span class="tech-item">Three.js</span>
+                            <span class="tech-item">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://example.com/artisan-shop" class="project-link primary-link" target="_blank">
+                            Visit Store <i class="fas fa-shopping-bag link-icon"></i>
+                        </a>
+                        <a href="https://example.com/artisan-tech-specs" class="project-link secondary-link"
+                            target="_blank">
+                            Tech Specs <i class="fas fa-code link-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-content">
+                <div class="contact-header">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p class="section-subtitle">We'd love to hear about your project and how we can help bring it to
+                        life.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <h3>Contact Information</h3>
+                            <p>Fill out the form or reach out directly through one of these channels.</p>
+
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Phone</h4>
+                                        <a href="tel:++27697020214">+27 69 702 0214</a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                            </path>
+                                            <polyline points="22,6 12,13 2,6"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Email</h4>
+                                        <a href="mailto:hello@example.com">designxfolio@gmail.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Based in</h4>
+                                        <a href="">Durban, KZN, South Africa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm" class="elegant-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" class="form-control" placeholder="john@example.com"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span>(optional)</span></label>
+                                <input type="tel" id="phone" class="form-control" placeholder="+1 (234) 567-890">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service">Service Interested In</label>
+                                <div class="custom-select">
+                                    <select id="service" class="form-control" required>
+                                        <option value="">Select a service</option>
+                                        <option value="web-development">Web Development</option>
+                                        <option value="graphic-design">Graphic Design</option>
+                                        <option value="hosting">Website Hosting</option>
+                                        <option value="domain">Domain Management</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" class="form-control" placeholder="Tell us about your project..."
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DesignX</h3>
+                    <p>Professional web development and design services to help your business thrive in the digital
+                        world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-user"></i> Rahul Dawpersad</li>
+                        <li><i class="fas fa-envelope"></i> designxfolio@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +27 69 702 0214</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Durban, KZN, South Africa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> DesignX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle icon"></i>
+        <div class="toast-content">
+            <h3>Success!</h3>
+            <p>Your message has been sent successfully.</p>
+        </div>
+        <button class="close-btn" id="closeToast">&times;</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/portfolio.js"></script>
+    <script src="assets/js/testimonials.js"></script>
+    <script>
+        // Add this script for parallax effect and scroll animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const hero = document.querySelector('.hero');
+            const bgImage = document.querySelector('.bg-image');
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+
+            // Parallax effect on scroll
+            window.addEventListener('scroll', function () {
+                const scrollPosition = window.pageYOffset;
+                const heroHeight = hero.offsetHeight;
+
+                if (scrollPosition <= heroHeight) {
+                    const opacity = 1 - (scrollPosition / (heroHeight * 0.5));
+                    const scale = 1 + (scrollPosition / (heroHeight * 2));
+
+                    bgImage.style.transform = `scale(${Math.max(scale, 1)})`;
+                    bgImage.style.opacity = Math.max(opacity, 0.8);
+
+                    if (scrollPosition > heroHeight * 0.3) {
+                        hero.classList.add('active');
+                    } else {
+                        hero.classList.remove('active');
+                    }
+                }
+            });
+
+            // Trigger animation on load
+            setTimeout(() => {
+                hero.classList.add('active');
+            }, 100);
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(animateOnScroll, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
