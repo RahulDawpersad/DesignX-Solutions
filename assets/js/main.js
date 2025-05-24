@@ -221,6 +221,33 @@ contactForm.addEventListener('submit', async function (e) {
   }
 });
 
+function formatSA(input) {
+  // Remove all characters except digits and +
+  let val = input.value.replace(/[^\d+]/g, '');
+
+  // Ensure only one + at the start
+  if (val.startsWith('+')) {
+    val = '+' + val.slice(1).replace(/\+/g, '');
+  }
+
+  // If user types '0', auto-convert to '+27'
+  if (val.startsWith('0')) {
+    val = '+27' + val.slice(1);
+  }
+
+  // Enforce +27 format only
+  if (!val.startsWith('+27')) {
+    val = '+27';
+  }
+
+  // Limit total length to +27 (3) + 9 digits = 12 characters
+  if (val.length > 12) {
+    val = val.slice(0, 12);
+  }
+
+  input.value = val;
+}
+
 
 
 // Pricing Fetched and sent to the Contact form
