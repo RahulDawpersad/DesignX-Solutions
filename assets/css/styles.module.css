@@ -26,6 +26,13 @@
     --Testimonials-white: #ffffff;
     --Testimonials-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --Testimonials-transition: all 0.3s ease;
+
+       /* Why Choose Us Styling */
+    --why-primary-color: #4361ee;
+    --why-secondary-color: #3a0ca3;
+    --why-text-color: #2b2d42;
+    --why-light-color: #f8f9fa;
+    --why-highlight-color: #4cc9f0;
 }
 
 * {
@@ -1351,7 +1358,7 @@ footer {
     background-repeat: no-repeat;
 }
 
-.card-front::before {
+/* .card-front::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1359,6 +1366,16 @@ footer {
     width: 100%;
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    z-index: 0;
+} */
+.card-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.2) 100%);
     z-index: 0;
 }
 
@@ -1505,6 +1522,112 @@ footer {
         flex-direction: column;
     }
 }
+
+
+/* Why Choose Us Styling */
+.why-choose-us {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+}
+
+.content {
+    flex: 1 1 50%;
+    min-width: 300px;
+}
+
+.image-container {
+    flex: 1 1 40%;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
+}
+
+.subtitle {
+    color: var(--why-primary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--why-text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: var(--why-primary-color);
+}
+
+.description {
+    color: var(--why-text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.feature {
+    display: flex;
+    gap: 1rem;
+}
+
+.feature-icon {
+    color: var(--why-primary-color);
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+}
+
+.feature-content h3 {
+    font-size: 1.2rem;
+    color: var(--why-text-color);
+    margin-bottom: 0.5rem;
+}
+
+.feature-content p {
+    color: var(--why-text-color);
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .why-choose-us {
+        flex-direction: column;
+        padding: 3rem 1.5rem;
+        gap: 2rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .content,
+    .image-container {
+        flex: 1 1 100%;
+    }
+}
+
 
 
 
