@@ -1093,13 +1093,13 @@ header {
     margin-bottom: 1.5rem;
 }
 
-.about-video {
+.about-image {
     border-radius: 5px;
     overflow: hidden;
     /* box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); */
 }
 
-.about-video video {
+.about-image img {
     width: 100%;
     height: auto;
     display: block;
@@ -1111,7 +1111,7 @@ header {
         grid-template-columns: 1fr;
     }
 
-    .about-video {
+    .about-image {
         order: -1;
         /* Moves video above text on mobile if desired */
     }
