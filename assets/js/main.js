@@ -199,7 +199,7 @@ async function handleFormSubmit(e) {
   }
 
   try {
-    const response = await fetch('https://design-x-solutions-server.vercel.app/send-email', {
+    const response = await fetch('https://designx-server.vercel.app/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
