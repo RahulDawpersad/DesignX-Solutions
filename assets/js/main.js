@@ -199,7 +199,7 @@ contactForm.addEventListener('submit', async function (e) {
 
   try {
     // Update this URL to your Render backend URL
-    const response = await fetch('https://designx-server.onrender.com/send-email', {
+    const response = await fetch('https://design-x-solutions-server.vercel.app/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
