@@ -177,49 +177,50 @@ function validateFormFields(formData) {
 
 // Updated form submission
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', async function (e) {
+// ======================
+// Form Submission
+// ======================
+async function handleFormSubmit(e) {
   e.preventDefault();
-
-  // Get form values
+  
   const formData = {
     name: document.getElementById('name').value.trim(),
     email: document.getElementById('email').value.trim(),
-    phone: document.getElementById('phone').value ? document.getElementById('phone').value.trim() : undefined,
+    phone: document.getElementById('phone').value?.trim(),
     service: document.getElementById('service').value,
     message: document.getElementById('message').value.trim()
   };
 
-  // Validate fields
+  // Validate
   const validationErrors = validateFormFields(formData);
-
   if (validationErrors.length > 0) {
     showToast(validationErrors.join('<br>'), 'error');
     return;
   }
 
   try {
-    // Update this URL to your Render backend URL
     const response = await fetch('https://design-x-solutions-server.vercel.app/send-email', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+      mode: 'cors' // Explicitly enable CORS
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to send message');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to send message');
     }
 
     showToast(`Thanks ${formData.name}! We'll contact you soon at ${formData.email}.`);
     contactForm.reset();
   } catch (error) {
     console.error('Submission error:', error);
-    showToast(error.message || 'There was an error sending your message.', 'error');
+    showToast(error.message || 'There was an error sending your message. Please try again later.', 'error');
   }
-});
+}
+
+contactForm.addEventListener('submit', handleFormSubmit);
+
 
 function formatSA(input) {
   // Remove all characters except digits and +
