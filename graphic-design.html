@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Design → DesignX Solutions</title>
+    <meta name="description"
+        content="Next-level graphic design: logos, menus, packaging, ads that don’t just look good — they dominate.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PP+Neue+Montreal:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --gray: #aaaaaa;
+            --accent: #ff4f7f;
+            --accent2: #7c3aed;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --blur: 10px;
+            --header-blur: 20px;
+            --header-bg: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PP Neue Montreal', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999999;
+            mix-blend-mode: difference;
+            color: white;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        header.scrolled {
+            background: var(--header-bg);
+            backdrop-filter: blur(var(--header-blur));
+            -webkit-backdrop-filter: blur(var(--header-blur));
+            mix-blend-mode: normal;
+        }
+
+        .logo img{
+            /* font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1px; */
+            width: 200px;
+            /* height: 100px; */
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 40px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 11vw;
+            font-weight: 800;
+            letter-spacing: -5px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff4f7f, #ff8b9f, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            user-select: none;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-top: 20px;
+            opacity: 0.6;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .cta {
+            padding: 200px 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000, #0f001f);
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 6rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 30px;
+        }
+
+        .cta button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 24px 80px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .cta button:hover {
+            transform: scale(1.1);
+            background: white;
+            color: black;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 20px;
+            }
+
+            .hero h1 {
+                font-size: 14vw;
+            }
+
+            .cta h2 {
+                font-size: 4rem;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                padding: 20px 40px;
+                flex-direction: column;
+                align-items: flex-start;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-bottom: 20px;
+                opacity: 1;
+            }
+        }
+
+        /* Projects Section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #projects {
+            padding: 80px 0;
+            background-color: var(--bg);
+        }
+
+        #projects h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: 500;
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .filter-btn:hover {
+            background-color: var(--accent2);
+            color: #fff;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-item {
+            /* background-color: var(--card-bg); */
+            /* border: 1px solid var(--card-border); */
+            border-radius: 20px;
+            overflow: hidden;
+            /* box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05); */
+            transition: all 0.3s;
+            display: none;
+            /* backdrop-filter: blur(var(--blur)); */
+            /* -webkit-backdrop-filter: blur(var(--blur)); */
+            text-align: center;
+        }
+
+        .project-item.show {
+            display: block;
+        }
+
+        /* .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+        } */
+
+        .project-item img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            margin: 0 auto;
+            /* Center the image */
+        }
+
+        .project-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Pricing Section */
+        #pricing {
+            padding: 80px 0;
+            background-color: var(--bg);
+        }
+
+        #pricing h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .pricing-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 79, 127, 0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .pricing-card:hover::before {
+            top: -100%;
+            left: -100%;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: block;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-card li {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .pricing-card button {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            #pricing h2 {
+                font-size: 2rem;
+            }
+
+            .pricing-card {
+                padding: 30px 20px;
+            }
+
+            .pricing-card .price {
+                font-size: 2.5rem;
+            }
+        }
+
+        #about {
+        padding: 80px 0;
+        background-color: var(--bg);
+    }
+
+    #about h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    #about p {
+        max-width: 800px;
+        margin: 0 auto 20px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.8;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        #about h2 {
+            font-size: 2rem;
+        }
+
+        #about p {
+            font-size: 1rem;
+            padding: 0 20px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><img src="Design-items/DesignX_Logo2.png"></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#pricing">Pricing</a>   
+            <!-- <a href="https://www.designx-solutions.co.za/#contact">Contact</a> -->
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    <section class="hero">
+        <div>
+            <h1>Graphic<br>Design</h1>
+            <p>No filler. Only fire.</p>
+        </div>
+    </section>
+    <section id="about" class="about">
+    <div class="container">
+        <h2>About DesignX Solutions</h2>
+        <p>At DesignX Solutions, we transform ideas into visual masterpieces that captivate and convert. Specializing in graphic design, our team of creative experts crafts stunning logos, business cards, menus, ads, flyers, and more—tailored to elevate your brand in a crowded digital world.</p>
+        <p>With years of experience in the industry, we blend cutting-edge trends with timeless principles to deliver designs that are not just beautiful, but strategically effective. Whether you're a startup needing a bold identity or an established business looking to refresh your visuals, we're here to make your vision a reality.</p>
+        <p>What sets us apart? Our commitment to "No filler. Only fire." We focus on high-impact, no-nonsense designs that drive results. From concept to final delivery, we collaborate closely with you to ensure every pixel aligns with your goals.</p>
+        <p>Ready to dominate with design? Let's create something unforgettable.</p>
+    </div>
+</section>
+    <section id="projects">
+        <div class="container">
+            <h2>Our Graphic Designs</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="business-cards">Business Cards</button>
+                <button class="filter-btn" data-filter="logos">Logos</button>
+                <button class="filter-btn" data-filter="food-menus">Food Menus</button>
+                <button class="filter-btn" data-filter="ads">Ads</button>
+                <button class="filter-btn" data-filter="flyers">Flyers</button>
+                <button class="filter-btn" data-filter="tshirt-design">T-Shirt Design</button>
+            </div>
+            <div class="project-grid">
+                <!-- Business Cards -->
+                <div class="project-item show" data-category="business-cards">
+                    <img src="Design-items/LaptopWorld-1-sided-Business-card-Design.png" alt="Business Card 1">
+                    <!-- <div class="project-info">
+                    <h3>Business Card 1</h3>
+                    <p>Professional business card design for corporate clients.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="business-cards">
+                    <img src="Design-items/bs-card-2.png"
+                        alt="Business Card 2">
+                    <!-- <div class="project-info">
+                        <h3>Business Card 2</h3>
+                        <p>Minimalist design with modern typography.</p>
+                    </div> -->
+                </div>
+                <!-- Logos -->
+                <div class="project-item show" data-category="logos">
+                    <img src="Design-items/DesignX_Logo_New.png" alt="Logo 1">
+                    <!-- <div class="project-info">
+                    <h3>Logo 1</h3>
+                    <p>Brand logo for a tech startup.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="logos">
+                    <img src="Design-items/ChatGPT_Image_Jan_5__2026__12_15_26_AM-removebg-preview.png" alt="Logo 2">
+                    <!-- <div class="project-info">
+                    <h3>Logo 2</h3>
+                    <p>Iconic logo for a fashion brand.</p>
+                </div> -->
+                </div>
+                <!-- Food Menus -->
+                <div class="project-item show" data-category="food-menus">
+                    <img src="Design-items/Lunch_Menu_Correct_one.png" alt="Food Menu 1">
+                    <!-- <div class="project-info">
+                    <h3>Food Menu 1</h3>
+                    <p>Elegant menu design for a fine dining restaurant.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="food-menus">
+                    <img src="Design-items/Drinks_Menus_Correct_One.png" alt="Food Menu 2">
+                    <!-- <div class="project-info">
+                    <h3>Food Menu 2</h3>
+                    <p>Colorful menu for a casual cafe.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="food-menus">
+                    <img src="Design-items/WHERE EVERY FLAVOR TELLS A STORY (2).png" alt="Food Menu 3">
+                    <!-- <div class="project-info">
+                    <h3>Food Menu 2</h3>
+                    <p>Colorful menu for a casual cafe.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="food-menus">
+                    <img src="Design-items/2.png" alt="Food Menu 4">
+                    <!-- <div class="project-info">
+                    <h3>Food Menu 2</h3>
+                    <p>Colorful menu for a casual cafe.</p>
+                </div> -->
+                </div>
+                <!-- Ads -->
+                <div class="project-item show" data-category="ads">
+                    <img src="Design-items/Untitled design.png" alt="Ad 1">
+                    <!-- <div class="project-info">
+                    <h3>Ad 1</h3>
+                    <p>Digital ad campaign for product launch.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="ads">
+                    <img src="Design-items/SWANICS' Feline Nutrition (1).png" alt="Ad 2">
+                    <!-- <div class="project-info">
+                    <h3>Ad 2</h3>
+                    <p>Social media ad with bold visuals.</p>
+                </div> -->
+                </div>
+                <!-- Flyers -->
+                <div class="project-item show" data-category="flyers">
+                    <img src="Design-items/PRE-OWNED LAPTOPS.png" alt="Flyer 1">
+                    <!-- <div class="project-info">
+                    <h3>Flyer 1</h3>
+                    <p>Event flyer for music festival.</p>
+                </div> -->
+                </div>
+                <div class="project-item show" data-category="flyers">
+                    <img src="Design-items/DesignX-2025-AD1.png" alt="Flyer 2">
+                    <!-- <div class="project-info">
+                        <h3>Flyer 2</h3>
+                        <p>Promotional flyer for sales event.</p>
+                    </div> -->
+                </div>
+
+
+                <div class="project-item show" data-category="tshirt-design">
+                    <img src="Design-items/Hurracan-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="tshirt design1">
+                    <!-- <div class="project-info">
+                    <h3>Business Card 1</h3>
+                    <p>Professional business card design for corporate clients.</p>
+                </div> -->
+                </div>
+
+                
+                <div class="project-item show" data-category="tshirt-design">
+                    <img src="Design-items/OTC-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="tshirt design2">
+                    <!-- <div class="project-info">
+                    <h3>Business Card 1</h3>
+                    <p>Professional business card design for corporate clients.</p>
+                </div> -->
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+    <section id="pricing">
+        <h2>Pricing</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Business Card Design</h3>
+                <p>( One Sided Design )</p>
+                <span class="price">R 150</span>
+                <!-- <ul>
+                    <li>3 Concepts</li>
+                    <li>Unlimited Revisions</li>
+                    <li>Source Files</li>
+                    <li>1 Week Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+             <div class="pricing-card">
+                <h3>Business Card Design</h3>
+                <p>( Two Sided Design )</p>
+                <span class="price">R 200</span>
+                <!-- <ul>
+                    <li>3 Concepts</li>
+                    <li>Unlimited Revisions</li>
+                    <li>Source Files</li>
+                    <li>1 Week Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+            <div class="pricing-card">
+                <h3>Logo Design</h3>
+                <span class="price">R 300</span>
+                <!-- <ul>
+                    <li>Custom Design</li>
+                    <li>Double-Sided</li>
+                    <li>Print-Ready Files</li>
+                    <li>3 Days Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+            <div class="pricing-card">
+                <h3>Food Menu Design</h3>
+                <span class="price">R 250</span>
+                <!-- <ul>
+                    <li>Multi-Page Layout</li>
+                    <li>Photo Integration</li>
+                    <li>Custom Icons</li>
+                    <li>5 Days Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+            <div class="pricing-card">
+                <h3>Ads & Flyers Design</h3>
+                <span class="price">R 300</span>
+                <!-- <ul>
+                    <li>Social Media Ready</li>
+                    <li>High-Resolution</li>
+                    <li>Branding Alignment</li>
+                    <li>4 Days Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+            <div class="pricing-card">
+                <h3>T-Shirt Design</h3>
+                <span class="price">R 250</span>
+                <!-- <ul>
+                    <li>Vector Graphics</li>
+                    <li>Mockups Included</li>
+                    <li>Color Variations</li>
+                    <li>2 Days Delivery</li>
+                </ul>
+                <button>Get Started</button> -->
+            </div>
+        </div>
+    </section>
+    <section class="cta">
+        <h2>Let’s make them jealous</h2>
+        <a href="https://www.designx-solutions.co.za/#contact"><button>Hire DesignX</button></a>
+    </section>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Project filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active to clicked button
+                button.classList.add('active');
+                const filter = button.getAttribute('data-filter');
+                projectItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.add('show');
+                    } else {
+                        item.classList.remove('show');
+                    }
+                });
+            });
+        });
+        // Header scrolled class
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.querySelector('header').classList.add('scrolled');
+            } else {
+                document.querySelector('header').classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
