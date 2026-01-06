@@ -59,12 +59,8 @@
             mix-blend-mode: normal;
         }
 
-        .logo img{
-            /* font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -1px; */
+        .logo img {
             width: 200px;
-            /* height: 100px; */
         }
 
         nav {
@@ -82,6 +78,24 @@
 
         nav a:hover {
             opacity: 1;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text);
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
 
         .hero {
@@ -146,17 +160,17 @@
             color: black;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 1024px) {
             header {
                 padding: 20px;
             }
 
-            .hero h1 {
-                font-size: 14vw;
+            .logo img {
+                width: 150px; /* Smaller logo on mobile and tablets to fit better */
             }
 
-            .cta h2 {
-                font-size: 4rem;
+            .hamburger {
+                display: flex;
             }
 
             nav {
@@ -172,10 +186,22 @@
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             }
 
+            nav.active {
+                display: flex;
+            }
+
             nav a {
                 margin-left: 0;
                 margin-bottom: 20px;
                 opacity: 1;
+            }
+
+            .hero h1 {
+                font-size: 14vw;
+            }
+
+            .cta h2 {
+                font-size: 4rem;
             }
         }
 
@@ -236,15 +262,10 @@
         }
 
         .project-item {
-            /* background-color: var(--card-bg); */
-            /* border: 1px solid var(--card-border); */
             border-radius: 20px;
             overflow: hidden;
-            /* box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05); */
             transition: all 0.3s;
             display: none;
-            /* backdrop-filter: blur(var(--blur)); */
-            /* -webkit-backdrop-filter: blur(var(--blur)); */
             text-align: center;
         }
 
@@ -252,17 +273,11 @@
             display: block;
         }
 
-        /* .project-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
-        } */
-
         .project-item img {
             width: 250px;
             height: 250px;
             object-fit: contain;
             margin: 0 auto;
-            /* Center the image */
         }
 
         .project-info {
@@ -401,50 +416,50 @@
         }
 
         #about {
-        padding: 80px 0;
-        background-color: var(--bg);
-    }
+            padding: 80px 0;
+            background-color: var(--bg);
+        }
 
-    #about h2 {
-        text-align: center;
-        margin-bottom: 40px;
-        font-size: 2.5rem;
-        font-weight: 700;
-        letter-spacing: -1px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    #about p {
-        max-width: 800px;
-        margin: 0 auto 20px;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        opacity: 0.8;
-        text-align: center;
-    }
-
-    @media (max-width: 768px) {
         #about h2 {
-            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         #about p {
-            font-size: 1rem;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            text-align: center;
         }
-    }
+
+        @media (max-width: 768px) {
+            #about h2 {
+                font-size: 2rem;
+            }
+
+            #about p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <div class="logo"><img src="Design-items/DesignX_Logo2.png"></div>
+        <div class="logo"><img src="Design-items/DesignX_Logo2.png" alt="DesignX Logo"></div>
         <nav>
             <a href="index.html">Home</a>
             <a href="#about">About</a>
-            <a href="#pricing">Pricing</a>   
+            <a href="#pricing">Pricing</a>
             <!-- <a href="https://www.designx-solutions.co.za/#contact">Contact</a> -->
         </nav>
         <div class="hamburger">
@@ -460,14 +475,14 @@
         </div>
     </section>
     <section id="about" class="about">
-    <div class="container">
-        <h2>About DesignX Solutions</h2>
-        <p>At DesignX Solutions, we transform ideas into visual masterpieces that captivate and convert. Specializing in graphic design, our team of creative experts crafts stunning logos, business cards, menus, ads, flyers, and more—tailored to elevate your brand in a crowded digital world.</p>
-        <p>With years of experience in the industry, we blend cutting-edge trends with timeless principles to deliver designs that are not just beautiful, but strategically effective. Whether you're a startup needing a bold identity or an established business looking to refresh your visuals, we're here to make your vision a reality.</p>
-        <p>What sets us apart? Our commitment to "No filler. Only fire." We focus on high-impact, no-nonsense designs that drive results. From concept to final delivery, we collaborate closely with you to ensure every pixel aligns with your goals.</p>
-        <p>Ready to dominate with design? Let's create something unforgettable.</p>
-    </div>
-</section>
+        <div class="container">
+            <h2>About DesignX Solutions</h2>
+            <p>At DesignX Solutions, we transform ideas into visual masterpieces that captivate and convert. Specializing in graphic design, our team of creative experts crafts stunning logos, business cards, menus, ads, flyers, and more—tailored to elevate your brand in a crowded digital world.</p>
+            <p>With years of experience in the industry, we blend cutting-edge trends with timeless principles to deliver designs that are not just beautiful, but strategically effective. Whether you're a startup needing a bold identity or an established business looking to refresh your visuals, we're here to make your vision a reality.</p>
+            <p>What sets us apart? Our commitment to "No filler. Only fire." We focus on high-impact, no-nonsense designs that drive results. From concept to final delivery, we collaborate closely with you to ensure every pixel aligns with your goals.</p>
+            <p>Ready to dominate with design? Let's create something unforgettable.</p>
+        </div>
+    </section>
     <section id="projects">
         <div class="container">
             <h2>Our Graphic Designs</h2>
@@ -484,114 +499,51 @@
                 <!-- Business Cards -->
                 <div class="project-item show" data-category="business-cards">
                     <img src="Design-items/LaptopWorld-1-sided-Business-card-Design.png" alt="Business Card 1">
-                    <!-- <div class="project-info">
-                    <h3>Business Card 1</h3>
-                    <p>Professional business card design for corporate clients.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="business-cards">
-                    <img src="Design-items/bs-card-2.png"
-                        alt="Business Card 2">
-                    <!-- <div class="project-info">
-                        <h3>Business Card 2</h3>
-                        <p>Minimalist design with modern typography.</p>
-                    </div> -->
+                    <img src="Design-items/bs-card-2.png" alt="Business Card 2">
                 </div>
                 <!-- Logos -->
                 <div class="project-item show" data-category="logos">
                     <img src="Design-items/DesignX_Logo_New.png" alt="Logo 1">
-                    <!-- <div class="project-info">
-                    <h3>Logo 1</h3>
-                    <p>Brand logo for a tech startup.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="logos">
                     <img src="Design-items/ChatGPT_Image_Jan_5__2026__12_15_26_AM-removebg-preview.png" alt="Logo 2">
-                    <!-- <div class="project-info">
-                    <h3>Logo 2</h3>
-                    <p>Iconic logo for a fashion brand.</p>
-                </div> -->
                 </div>
                 <!-- Food Menus -->
                 <div class="project-item show" data-category="food-menus">
                     <img src="Design-items/Lunch_Menu_Correct_one.png" alt="Food Menu 1">
-                    <!-- <div class="project-info">
-                    <h3>Food Menu 1</h3>
-                    <p>Elegant menu design for a fine dining restaurant.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="food-menus">
                     <img src="Design-items/Drinks_Menus_Correct_One.png" alt="Food Menu 2">
-                    <!-- <div class="project-info">
-                    <h3>Food Menu 2</h3>
-                    <p>Colorful menu for a casual cafe.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="food-menus">
                     <img src="Design-items/WHERE EVERY FLAVOR TELLS A STORY (2).png" alt="Food Menu 3">
-                    <!-- <div class="project-info">
-                    <h3>Food Menu 2</h3>
-                    <p>Colorful menu for a casual cafe.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="food-menus">
                     <img src="Design-items/2.png" alt="Food Menu 4">
-                    <!-- <div class="project-info">
-                    <h3>Food Menu 2</h3>
-                    <p>Colorful menu for a casual cafe.</p>
-                </div> -->
                 </div>
                 <!-- Ads -->
                 <div class="project-item show" data-category="ads">
                     <img src="Design-items/Untitled design.png" alt="Ad 1">
-                    <!-- <div class="project-info">
-                    <h3>Ad 1</h3>
-                    <p>Digital ad campaign for product launch.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="ads">
                     <img src="Design-items/SWANICS' Feline Nutrition (1).png" alt="Ad 2">
-                    <!-- <div class="project-info">
-                    <h3>Ad 2</h3>
-                    <p>Social media ad with bold visuals.</p>
-                </div> -->
                 </div>
                 <!-- Flyers -->
                 <div class="project-item show" data-category="flyers">
                     <img src="Design-items/PRE-OWNED LAPTOPS.png" alt="Flyer 1">
-                    <!-- <div class="project-info">
-                    <h3>Flyer 1</h3>
-                    <p>Event flyer for music festival.</p>
-                </div> -->
                 </div>
                 <div class="project-item show" data-category="flyers">
                     <img src="Design-items/DesignX-2025-AD1.png" alt="Flyer 2">
-                    <!-- <div class="project-info">
-                        <h3>Flyer 2</h3>
-                        <p>Promotional flyer for sales event.</p>
-                    </div> -->
                 </div>
-
-
+                <!-- T-Shirt Designs -->
                 <div class="project-item show" data-category="tshirt-design">
-                    <img src="Design-items/Hurracan-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="tshirt design1">
-                    <!-- <div class="project-info">
-                    <h3>Business Card 1</h3>
-                    <p>Professional business card design for corporate clients.</p>
-                </div> -->
+                    <img src="Design-items/Hurracan-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="T-Shirt Design 1">
                 </div>
-
-                
                 <div class="project-item show" data-category="tshirt-design">
-                    <img src="Design-items/OTC-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="tshirt design2">
-                    <!-- <div class="project-info">
-                    <h3>Business Card 1</h3>
-                    <p>Professional business card design for corporate clients.</p>
-                </div> -->
+                    <img src="Design-items/OTC-T-Shirt-Mockup-With-Design-removebg-preview.png" alt="T-Shirt Design 2">
                 </div>
-
-
-
             </div>
         </div>
     </section>
@@ -602,69 +554,27 @@
                 <h3>Business Card Design</h3>
                 <p>( One Sided Design )</p>
                 <span class="price">R 150</span>
-                <!-- <ul>
-                    <li>3 Concepts</li>
-                    <li>Unlimited Revisions</li>
-                    <li>Source Files</li>
-                    <li>1 Week Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
-             <div class="pricing-card">
+            <div class="pricing-card">
                 <h3>Business Card Design</h3>
                 <p>( Two Sided Design )</p>
                 <span class="price">R 200</span>
-                <!-- <ul>
-                    <li>3 Concepts</li>
-                    <li>Unlimited Revisions</li>
-                    <li>Source Files</li>
-                    <li>1 Week Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
             <div class="pricing-card">
                 <h3>Logo Design</h3>
                 <span class="price">R 300</span>
-                <!-- <ul>
-                    <li>Custom Design</li>
-                    <li>Double-Sided</li>
-                    <li>Print-Ready Files</li>
-                    <li>3 Days Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
             <div class="pricing-card">
                 <h3>Food Menu Design</h3>
                 <span class="price">R 250</span>
-                <!-- <ul>
-                    <li>Multi-Page Layout</li>
-                    <li>Photo Integration</li>
-                    <li>Custom Icons</li>
-                    <li>5 Days Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
             <div class="pricing-card">
                 <h3>Ads & Flyers Design</h3>
                 <span class="price">R 300</span>
-                <!-- <ul>
-                    <li>Social Media Ready</li>
-                    <li>High-Resolution</li>
-                    <li>Branding Alignment</li>
-                    <li>4 Days Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
             <div class="pricing-card">
                 <h3>T-Shirt Design</h3>
                 <span class="price">R 250</span>
-                <!-- <ul>
-                    <li>Vector Graphics</li>
-                    <li>Mockups Included</li>
-                    <li>Color Variations</li>
-                    <li>2 Days Delivery</li>
-                </ul>
-                <button>Get Started</button> -->
             </div>
         </div>
     </section>
@@ -682,14 +592,20 @@
                 });
             });
         });
+
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
         // Project filtering
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectItems = document.querySelectorAll('.project-item');
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active to clicked button
                 button.classList.add('active');
                 const filter = button.getAttribute('data-filter');
                 projectItems.forEach(item => {
@@ -701,6 +617,7 @@
                 });
             });
         });
+
         // Header scrolled class
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
