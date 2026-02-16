@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Policy | DesignX</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* PERPLEXITY AI FONT STACK */
+            /* Primary Serif (Headings): Heldane Display / Newsreader */
+            --font-heading: 'Heldane Display', 'Newsreader', serif;
+            /* Primary Sans (Body/UI): FK Grotesk / Inter */
+            --font-body: 'FK Grotesk', 'Inter', sans-serif;
+            /* Monospace: Berkeley Mono / Roboto Mono */
+            --font-mono: 'Berkeley Mono', 'Roboto Mono', monospace;
+
+            /* DesignX Color Palette */
+            --bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #6b6b6b;
+            --accent: #000000;
+            --border: #e5e7eb;
+            --alert-bg: #fdf2f2;
+            --alert-border: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .policy-wrapper {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* --- HEADER --- */
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .brand {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .meta-info {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CONTENT --- */
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            padding-top: 10px;
+        }
+
+        h3 {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+        }
+
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .no-cash-banner {
+            background: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            padding: 24px;
+            border-radius: 4px;
+            margin: 30px 0;
+        }
+
+        .no-cash-banner h4 {
+            font-family: var(--font-mono);
+            color: #b91c1c;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .payment-structure {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .step {
+            flex: 1;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .step span {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            display: block;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PRINT & RESPONSIVE --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .payment-structure { flex-direction: column; }
+        }
+
+        @media print {
+            body { padding: 0; }
+            .no-cash-banner { border: 1px solid #000; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="policy-wrapper">
+        <header>
+            <span class="brand">DesignX / Operations</span>
+            <h1>Payment & Transaction Policy</h1>
+            <p class="meta-info">LAST UPDATED: <span id="currentDate"></span></p>
+        </header>
+
+        <main>
+            <section>
+                <h2>1. Accepted Payment Methods</h2>
+                <p>DesignX maintains a strictly digital financial workflow to ensure security and project integrity.</p>
+                <ul>
+                    <li>Electronic Funds Transfer (EFT)</li>
+                    <li>Direct Bank Transfer</li>
+                    <li>Approved Digital Payment Gateways</li>
+                </ul>
+
+                <div class="no-cash-banner">
+                    <h4>⚠️ POLICY RESTRICTION</h4>
+                    <p style="margin:0; font-weight: 500;">Cash payments are strictly prohibited and will not be accepted under any circumstances.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Non-Acceptance of Cash</h2>
+                
+                <h3>A. Risk Mitigation</h3>
+                <p>Digital transactions eliminate risks associated with loss, theft, and counterfeit currency, ensuring funds are secured immediately.</p>
+
+                <h3>B. Audit Transparency</h3>
+                <p>Every payment through DesignX requires a digital audit trail for tax compliance and dispute resolution. Proof of payment is instant and verifiable.</p>
+
+                <h3>C. Operational Speed</h3>
+                <p>Automated confirmations allow our team to bypass manual banking admin and focus entirely on your creative deliverables.</p>
+            </section>
+
+            <section>
+                <h2>3. Payment Structure</h2>
+                <p>Applicable to Web Development, Branding, and Graphic Design services.</p>
+                
+                <div class="payment-structure">
+                    <div class="step">
+                        <span>50%</span>
+                        <p class="mono">DEPOSIT</p>
+                        <p style="font-size: 0.9rem;">Commencement of project.</p>
+                    </div>
+                    <div class="step">
+                        <span>50%</span>
+                        <p class="mono">FINAL</p>
+                        <p style="font-size: 0.9rem;">Prior to file delivery/launch.</p>
+                    </div>
+                </div>
+
+                <p>Failure to settle outstanding balances may result in the withholding of final source files or temporary suspension of active hosting services.</p>
+            </section>
+
+            <section>
+                <h2>4. Service Suspension</h2>
+                <p>In the event of overdue final payments, DesignX reserves the right to pause live websites. Service is restored immediately upon confirmation of the remaining balance.</p>
+            </section>
+
+            <section>
+                <h2>5. Refund Terms</h2>
+                <ul>
+                    <li><strong>Deposits:</strong> Non-refundable once research or design work has started.</li>
+                    <li><strong>Completion:</strong> Delivered and approved projects are final and ineligible for refund.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer style="margin-top: 100px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <p class="mono">© <span id="year"></span> DESIGNX DIGITAL SERVICES</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set dynamic date and year
+        const date = new Date();
+        document.getElementById('currentDate').innerText = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase();
+        document.getElementById('year').innerText = date.getFullYear();
+    </script>
+
+</body>
+</html>
