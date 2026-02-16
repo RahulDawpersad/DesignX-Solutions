@@ -50,6 +50,34 @@
             width: 100%;
         }
 
+         .breadcrumbs {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 60px;
+        }
+
+        .breadcrumbs a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumbs span {
+            color: #d1d5db;
+            margin: 0 8px;
+        }
+
+        .breadcrumbs .current {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         /* --- HEADER --- */
         header {
             border-bottom: 1px solid var(--border);
